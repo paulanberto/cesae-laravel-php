@@ -1,15 +1,13 @@
 @extends('layouts.fo_layout')
 @section('content')
+    @if (session('message'))
+        <div class="alert alert-sucess">
+            {{ session('message') }}
+        </div>
+    @endif
 
 
-@if (session('message'))
-<div class="alert alert-sucess">
-    {{ session('message') }}
-</div>
-@endif
-
-
-<h6>Aqui tens todas as Tarefas</h6>
+    <h1 class="mb-3">Aqui tens todas as Tarefas</h1>
 
     <table class="table">
         <thead>
@@ -37,4 +35,4 @@
             @endforeach
         </tbody>
     </table>
-    @endsection
+@endsection

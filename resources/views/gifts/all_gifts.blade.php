@@ -7,7 +7,7 @@
     @endif
 
     @csrf
-    <h1>Lista de Presentes</h1>
+    <h1 class="mb-3">Lista de Presentes</h1>
     <table class="table">
         <thead>
             <tr>
