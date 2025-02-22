@@ -37,6 +37,35 @@
                 </ul>
             </div>
         </div>
+        @if (Route::has('login'))
+            <nav class="d-flex align-items-center gap-3">
+                @auth
+                    <a href="{{ route('home.dashboard') }}"
+                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                        Dashboard
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST"
+                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                @else
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="{{ route('login') }}"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            Login
+                        </a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('users.add') }}"
+                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                Register
+                            </a>
+                    </div>
+            @endif
+        @endauth
+    </nav>
+    @endif
     </nav>
 
     <div class="container mt-3">

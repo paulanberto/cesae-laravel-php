@@ -15,26 +15,38 @@
 
     <h6>Contactos</h6>
 
+    <div>
+        <form action="">
+            <input type="text" id="" name="search" value="{{ request()->query('search') }}">
+            <button type="submit" class="btn btn-secondary">Procurar</button>
+        </form>
+
+    </div>
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th>Foto</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
             @foreach ($allUsers as $user)
                 <tr>
-                    <th scope="col">{{ $user->id }}</th>
-                    <th scope="col">{{ $user->name }}</th>
-                    <th scope="col">{{ $user->email }}</th>
-                    <th scope="col"><a class='btn btn-info' href="{{ route('users.view', $user->id) }}">Ver</a></th>
-                    <th scope="col"><a class='btn btn-info' href="{{ route('users.delete', $user->id) }}">Excluir</a>
-                    </th>
+                    <td><img style="width:50px; height:50px"
+                            src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('image/noPhoto.jpg') }}"
+                            alt=""></td>
+                    <td scope="row">{{ $user->id }}</td>
+                    <th>{{ $user->name }}</td>
+                    <th>{{ $user->email }}</td>
+                    <td><a class='btn btn-info' href="{{ route('users.view', $user->id) }}">Ver/Editar</a>
+
+                        <a class='btn btn-danger' href="{{ route('users.delete', $user->id) }}">Excluir</a>
+                    </td>
 
 
                 </tr>

@@ -13,11 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        //Desta forma cria dados muito aleatórios
+        /*$this->call([
+            UserSeeder::class,
+        ]);*/
 
-        User::factory()->create([
+        //Desta forma cria dados mais controlados, com dados mais próximos ao real
+        User::factory(50)->create();
+
+
+        /* User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
-        ]);
+        ]);*/
     }
 }

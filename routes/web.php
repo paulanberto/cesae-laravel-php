@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GiftsController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,31 +28,28 @@ Route::post('/create-user', [UserController::class, 'createUser'])->name('users.
 //rota para botão de ver, para acessar info um usuário
 Route::get('/users/{id}', [UserController::class, 'viewUser'])->name('users.view');
 //rota para botão de excluir, para excluir um usuário
-Route::get('/delete-user/{id}', [UserController:: class, 'deleteUserFromDB'])->name('users.delete');
+Route::get('/delete-user/{id}', [UserController::class, 'deleteUserFromDB'])->name('users.delete');
 
 
 
 //rota tasks
-Route::get('/tasks', [TasksController::class, 'index'])->name('tasks');
+Route::get('/tasks', [TasksController::class, 'index'])->name('tasks')->middleware('auth');
 
-Route::get('/view-task/{id}', [TasksController:: class, 'viewTask'])->name('tasks.view');
+Route::get('/view-task/{id}', [TasksController::class, 'viewTask'])->name('tasks.view');
 
-Route::get('/delete-task/{id}', [TasksController:: class, 'deleteTaskFromDB'])->name('tasks.delete');
-
-
+Route::get('/delete-task/{id}', [TasksController::class, 'deleteTaskFromDB'])->name('tasks.delete');
 
 Route::get('/add-task', [TasksController::class, 'addTasks'])->name('tasks.add');
 
-Route::post('/create-tasks', [TasksController::class, 'createTasks'])->name('tasks.create');
+Route::post('/create-tasks', [TasksController::class, 'createTasks'])->name('tasks.create')->middleware('auth');
 
 
 //rota gifts
 Route::get('/gifts', [GiftsController::class, 'allGifts'])->name('gifts.all');
 
-Route::get('/view-gifts/{id}', [GiftsController:: class, 'viewGifts'])->name('gifts.view');
+Route::get('/view-gifts/{id}', [GiftsController::class, 'viewGifts'])->name('gifts.view');
 
-Route::get('/delete-gifts/{id}', [GiftsController:: class, 'deleteGiftsFromDB'])->name('gifts.delete');
-
+Route::get('/delete-gifts/{id}', [GiftsController::class, 'deleteGiftsFromDB'])->name('gifts.delete');
 
 Route::get('/add-gifts', [GiftsController::class, 'addGifts'])->name('gifts.add');
 
@@ -62,14 +60,17 @@ Route::get('/edit-gifts/{id}', [GiftsController::class, 'editGifts'])->name('gif
 Route::put('/gifts/{id}', [GiftsController::class, 'updateGifts'])->name('gifts.update');
 
 
+//rota dashboard
+Route::get('/home-dashboard', [DashboardController::class, 'indexDashboard'])->name('home.dashboard')->middleware('auth');
+
 
 //rota com paramentros
-Route::get('/hello/{name}', function($name){
-    return '<h1>Hello</h1>'.$name;
+Route::get('/hello/{name}', function ($name) {
+    return '<h1>Hello</h1>' . $name;
 });
 
 //rota fallback: cai aqui quando não encontra nenhuma rota com o url solicitado no frontend
-Route::fallback(function(){
+Route::fallback(function () {
     return view('fallback');
 });
 

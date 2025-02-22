@@ -2,6 +2,12 @@
 @section('content')
     <div class="home">
 
+        @auth
+            <h5>Olá {{ Auth::user()->name }}</h5>
+
+        @endauth
+
+
         <h5> {{ $myVar }}</h5>
 
         <img class="imagem" src="{{ asset('image/dev2.jpg') }}" alt="" height="200px" width="300px">
